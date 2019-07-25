@@ -1,0 +1,19 @@
+<resources>
+	<string name="app_name">Social-Vue</string>
+	
+	<string name="welcome">WELCOME</string>
+	<string name="email">Email</string>
+	<string name="password">Password</string>
+	<string name="sign_in">SIGN IN</string>
+	<string name="forgot_password">Forgot password?</string>
+	<string name="create_account">Create new account</string>
+	<string name="create_new_account">CREATE NEW \n ACCOUNT</string>
+	<string name="first_name">First Name</string>
+	<string name="last_name">Last Name</string>
+	<string name="email_address">Email Address</string>
+	
+	<string name="error_message">Sign in failed! Wrong password or username</string>
+	<string name="no_account">Don\'t have an account?</string>
+	<string name="username">Username</string>
+	<string name="terms_and_conditions">By tapping \"Sign Up\" you agree \n to the terms &amp; Conditions</string>
+</resources>
