@@ -4,20 +4,27 @@
 		xmlns:app="http://schemas.android.com/apk/res-auto"
 		xmlns:tools="http://schemas.android.com/tools"
 		android:id="@+id/auth_graph"
-		app:startDestination="@id/signInFragment">
+		app:startDestination="@id/signUpFragment">
 	
 	<fragment
 			android:id="@+id/signInFragment"
 			android:name="com.techgroup.social_vue.auth.SignInFragment"
 			android:label="fragment_sign_up"
 			tools:layout="@layout/fragment_sign_in">
-		<action
-				android:id="@+id/action_signInFragment_to_signUpFragment"
-				app:destination="@id/signUpFragment"/>
+		<argument
+				android:name="users"
+				app:argType="com.techgroup.social_vue.auth.data.User"
+				app:nullable="true"
+				android:defaultValue="@null"/>
 	</fragment>
 	<fragment
 			android:id="@+id/signUpFragment"
 			android:name="com.techgroup.social_vue.auth.SignUpFragment"
 			android:label="fragment_sign_up"
-			tools:layout="@layout/fragment_sign_up"/>
+			tools:layout="@layout/fragment_sign_up">
+		<action
+				android:id="@+id/action_signUpFragment_to_signInFragment"
+				app:destination="@id/signInFragment"/>
+	</fragment>
+
 </navigation>

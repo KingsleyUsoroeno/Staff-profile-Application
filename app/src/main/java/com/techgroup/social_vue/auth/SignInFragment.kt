@@ -2,14 +2,13 @@ package com.techgroup.social_vue.auth
 
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.navigation.findNavController
+import androidx.fragment.app.Fragment
 import com.techgroup.social_vue.R
-import kotlinx.android.synthetic.main.fragment_sign_in.*
 
 /**
  * A simple [Fragment] subclass.
@@ -26,8 +25,9 @@ class SignInFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_sign_in, container, false)
         val tvCreateAccount = view.findViewById<TextView>(R.id.tv_create_account)
 
-        tvCreateAccount.setOnClickListener {
-            it.findNavController().navigate(R.id.action_signInFragment_to_signUpFragment)
+        val user = arguments?.let {
+            Log.i("SignInFragment", "User Details is $it")
+            SignInFragmentArgs.fromBundle(it)
         }
 
         return view
