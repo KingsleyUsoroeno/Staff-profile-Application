@@ -1,4 +1,4 @@
-package com.techgroup.social_vue.activity
+package com.techgroup.social_vue.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

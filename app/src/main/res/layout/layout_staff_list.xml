@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+		xmlns:app="http://schemas.android.com/apk/res-auto"
+		xmlns:tools="http://schemas.android.com/tools">
+	
+	<data>
+		
+		<variable
+				name="staff"
+				type="com.techgroup.social_vue.data.model.Staff" />
+	</data>
+	
+	<androidx.constraintlayout.widget.ConstraintLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_margin="@dimen/dimen_8">
+		
+		
+		<de.hdodenhof.circleimageview.CircleImageView
+				android:id="@+id/profileImage"
+				android:layout_width="70dp"
+				android:layout_height="70dp"
+				app:layout_constraintBottom_toBottomOf="parent"
+				app:layout_constraintLeft_toLeftOf="parent"
+				app:layout_constraintTop_toTopOf="parent"
+				tools:src="@drawable/profile_img" />
+		
+		<androidx.appcompat.widget.AppCompatTextView
+				android:id="@+id/staffNameTextView"
+				android:layout_width="@dimen/dimen_0"
+				android:layout_height="wrap_content"
+				android:layout_marginStart="@dimen/dimen_6"
+				android:layout_marginTop="@dimen/dimen_4"
+				android:textSize="@dimen/text_size_16"
+				android:textStyle="bold"
+				app:layout_constraintEnd_toEndOf="parent"
+				app:layout_constraintStart_toEndOf="@id/profileImage"
+				app:layout_constraintTop_toTopOf="@id/profileImage"
+				tools:text="Kingsley Usoro" />
+		
+		
+		<androidx.appcompat.widget.AppCompatTextView
+				android:id="@+id/staffEmailTextView"
+				android:layout_width="@dimen/dimen_0"
+				android:layout_height="wrap_content"
+				android:layout_marginStart="@dimen/dimen_6"
+				android:layout_marginTop="@dimen/dimen_2"
+				android:textSize="@dimen/text_size_14"
+				app:layout_constraintStart_toEndOf="@id/profileImage"
+				app:layout_constraintTop_toBottomOf="@id/staffNameTextView"
+				tools:text="Kingsley@gmail.com" />
+		
+		<androidx.appcompat.widget.AppCompatTextView
+				android:id="@+id/staffStateTextView"
+				android:layout_width="@dimen/dimen_0"
+				android:layout_height="wrap_content"
+				android:layout_marginStart="@dimen/dimen_6"
+				android:layout_marginTop="@dimen/dimen_2"
+				android:textSize="@dimen/text_size_14"
+				app:layout_constraintStart_toEndOf="@id/profileImage"
+				app:layout_constraintTop_toBottomOf="@id/staffEmailTextView"
+				tools:text="Akwa Ibom State" />
+	
+	
+	</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
