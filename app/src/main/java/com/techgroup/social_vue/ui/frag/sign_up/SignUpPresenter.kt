@@ -1,6 +1,7 @@
 package com.techgroup.social_vue.ui.frag.sign_up
 
 import com.techgroup.social_vue.Common
+import com.techgroup.social_vue.R
 import com.techgroup.social_vue.data.StaffViewModel
 import com.techgroup.social_vue.data.model.Staff
 
@@ -44,5 +45,6 @@ class SignUpPresenter(
         val staff = Staff(0, fullName, email, stateOfOrigin, dob, imageUrl)
         staffViewModel.insertStaff(staff)
         signUpView.showSuccessMsg("Credentials saved successfully")
+        signUpView.navigate(R.id.action_signUpFragment_to_staffsFragment)
     }
 }

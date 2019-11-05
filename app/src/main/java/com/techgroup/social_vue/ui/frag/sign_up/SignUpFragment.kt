@@ -11,9 +11,7 @@ import android.os.Handler
 import android.os.Looper
 import android.provider.MediaStore
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -50,203 +48,223 @@ import kotlin.collections.HashMap
  */
 class SignUpFragment : Fragment(), SignUpView {
 
-    private lateinit var signUpFragmentBinding: FragmentSignUpBinding
-    private lateinit var navController: NavController
-    private lateinit var signUpPresenter: SignUpPresenter
-    private val config = HashMap<String, String>()
-    private lateinit var staffViewModel: StaffViewModel
+	private lateinit var signUpFragmentBinding: FragmentSignUpBinding
+	private lateinit var navController: NavController
+	private lateinit var signUpPresenter: SignUpPresenter
+	private val config = HashMap<String, String>()
+	private lateinit var staffViewModel: StaffViewModel
 
-    companion object {
-        const val TAG = "SignUpFragment"
-    }
+	companion object {
+		const val TAG = "SignUpFragment"
+	}
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        signUpFragmentBinding =
-            DataBindingUtil.inflate(inflater, R.layout.fragment_sign_up, container, false)
-        navController = Navigation.findNavController(activity!!, R.id.nav_host_fragment)
+	override fun onCreate(savedInstanceState: Bundle?) {
+		super.onCreate(savedInstanceState)
+		setHasOptionsMenu(true)
+	}
 
-        val viewModelFactoryProvider =
-            ViewModelFactoryProvider(StaffDatabase.getDatabase(this.context!!))
-        
-        staffViewModel =
-            ViewModelProviders.of(this, viewModelFactoryProvider).get(StaffViewModel::class.java)
-        signUpPresenter = SignUpPresenter(this, staffViewModel)
+	override fun onCreateView(
+		inflater: LayoutInflater, container: ViewGroup?,
+		savedInstanceState: Bundle?
+	): View? {
+		// Inflate the layout for this fragment
+		signUpFragmentBinding =
+			DataBindingUtil.inflate(inflater, R.layout.fragment_sign_up, container, false)
+		navController = Navigation.findNavController(activity!!, R.id.nav_host_fragment)
 
-        signUpFragmentBinding.imgSelectProfile.setOnClickListener {
-            startGalleryIntent()
-        }
+		val viewModelFactoryProvider =
+			ViewModelFactoryProvider(StaffDatabase.getDatabase(this.context!!))
 
-        signUpFragmentBinding.btnSignUp.setOnClickListener {
-            signUpPresenter.saveUser()
-        }
+		staffViewModel =
+			ViewModelProviders.of(this, viewModelFactoryProvider).get(StaffViewModel::class.java)
+		signUpPresenter = SignUpPresenter(this, staffViewModel)
 
-        loadProfileImage()
-        return signUpFragmentBinding.root
-    }
+		signUpFragmentBinding.imgSelectProfile.setOnClickListener {
+			startGalleryIntent()
+		}
 
-    private fun loadProfileImage() {
-        val url = SharedPreferenceHelper.getString(this.context!!, Constant.PROFILE_IMAGE, "")
-        if (url!!.isNotEmpty()) {
-            Log.i(TAG, "url to image is $url")
-            Glide.with(this.context!!).load(url)
-                .placeholder(R.drawable.loading_animation)
-                .into(signUpFragmentBinding.imgContactImage)
-        } else {
-            Picasso.get().load(R.drawable.profile_img).into(signUpFragmentBinding.imgContactImage)
-        }
-    }
+		signUpFragmentBinding.btnSignUp.setOnClickListener {
+			signUpPresenter.saveUser()
+		}
 
-    override fun getFullName(): String {
-        return signUpFragmentBinding.fullNameEditText.text.toString().trim()
-    }
+		loadProfileImage()
+		return signUpFragmentBinding.root
+	}
 
-    override fun getEmailAddress(): String {
-        return signUpFragmentBinding.emailEditText.text.toString().trim()
-    }
+	override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+		inflater.inflate(R.menu.staff_meu, menu)
+	}
 
-    override fun getStateOfOrigin(): String {
-        return signUpFragmentBinding.stateOfOriginEditText.text.toString().trim()
-    }
+	override fun onOptionsItemSelected(item: MenuItem): Boolean {
+		if (item.itemId == R.id.action_view_all_staff) {
+			navController.navigate(R.id.staffsFragment)
+		}
+		return true
+	}
 
-    override fun getDob(): String {
-        val dayOfMonth = signUpFragmentBinding.dobDatePicker.dayOfMonth
-        val year = signUpFragmentBinding.dobDatePicker.year
-        val month = signUpFragmentBinding.dobDatePicker.month
-        return getUserDob(month, dayOfMonth, year)
-    }
+	private fun loadProfileImage() {
+		val url = SharedPreferenceHelper.getString(this.context!!, Constant.PROFILE_IMAGE, "")
+		if (url!!.isNotEmpty()) {
+			Log.i(TAG, "url to image is $url")
+			Glide.with(this.context!!).load(url)
+				.placeholder(R.drawable.loading_animation)
+				.into(signUpFragmentBinding.imgContactImage)
+		} else {
+			Picasso.get().load(R.drawable.profile_img).into(signUpFragmentBinding.imgContactImage)
+		}
+	}
 
-    override fun getUserImage(): String? {
-        return SharedPreferenceHelper.getString(this.context!!, Constant.PROFILE_IMAGE, "")
-    }
+	override fun getFullName(): String {
+		return signUpFragmentBinding.fullNameEditText.text.toString().trim()
+	}
 
-    override fun showError(error: String) {
-        showToast(error)
-    }
+	override fun getEmailAddress(): String {
+		return signUpFragmentBinding.emailEditText.text.toString().trim()
+	}
 
-    override fun showSuccessMsg(error: String) {
-        showToast(error)
-    }
+	override fun getStateOfOrigin(): String {
+		return signUpFragmentBinding.stateOfOriginEditText.text.toString().trim()
+	}
 
-    private fun startGalleryIntent() {
-        if (ContextCompat.checkSelfPermission(context!!, Manifest.permission.READ_EXTERNAL_STORAGE)
-            != PackageManager.PERMISSION_GRANTED
-        ) {
-            ActivityCompat.requestPermissions(
-                this.activity!!,
-                arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
-                GALLERY_PERMISSION_CODE
-            )
-        } else {
-            pickFromGallery()
-        }
-    }
+	override fun getDob(): String {
+		val dayOfMonth = signUpFragmentBinding.dobDatePicker.dayOfMonth
+		val year = signUpFragmentBinding.dobDatePicker.year
+		val month = signUpFragmentBinding.dobDatePicker.month
+		return getUserDob(month, dayOfMonth, year)
+	}
 
-    private fun pickFromGallery() {
-        //Create an Intent with action as ACTION_PICK
-        val intent = Intent(Intent.ACTION_PICK)
-        // Sets the type as image/*. This ensures only components of type image are selected
-        intent.type = "image/*"
-        // Launching the Intent
-        startActivityForResult(intent, GALLERY_REQUEST_CODE)
-    }
+	override fun getUserImage(): String? {
+		return SharedPreferenceHelper.getString(this.context!!, Constant.PROFILE_IMAGE, "")
+	}
 
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        when (requestCode) {
-            GALLERY_PERMISSION_CODE -> {
-                if (grantResults.isEmpty() || grantResults[0] != PackageManager.PERMISSION_GRANTED) {
-                    ActivityCompat.requestPermissions(
-                        this.activity!!,
-                        arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
-                        GALLERY_REQUEST_CODE
-                    )
-                } else {
-                    pickFromGallery()
-                }
-            }
-        }
-    }
+	override fun navigate(direction: Int) {
+		navController.navigate(direction)
+	}
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == Activity.RESULT_OK && data!!.data != null) {
-            when (requestCode) {
-                GALLERY_REQUEST_CODE -> {
-                    loadImage(data.data!!)
-                    val filePath = getRealPathFromURIPath(data.data!!, this.activity!!)
-                    GlobalScope.launch {
-                        uploadUserImage(File(filePath))
-                    }
-                }
-            }
-        }
-    }
+	override fun showError(error: String) {
+		showToast(error)
+	}
 
-    private fun getRealPathFromURIPath(contentURI: Uri, activity: Activity): String {
-        val cursor = activity.contentResolver.query(contentURI, null, null, null, null)
-        return if (cursor == null) {
-            contentURI.path!!
-        } else {
-            cursor.moveToFirst()
-            val idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA)
-            cursor.getString(idx)
-        }
-    }
+	override fun showSuccessMsg(error: String) {
+		showToast(error)
+	}
 
-    private fun uploadUserImage(imageFile: File) {
-        config[Constant.CLOUD_NAME] = Constant.NAME
-        config[Constant.API_KEY] = Constant.KEY
-        config[Constant.API_SECRET] = Constant.SECRET
+	private fun startGalleryIntent() {
+		if (ContextCompat.checkSelfPermission(context!!, Manifest.permission.READ_EXTERNAL_STORAGE)
+			!= PackageManager.PERMISSION_GRANTED
+		) {
+			ActivityCompat.requestPermissions(
+				this.activity!!,
+				arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
+				GALLERY_PERMISSION_CODE
+			)
+		} else {
+			pickFromGallery()
+		}
+	}
 
-        val cloudinary = Cloudinary(config)
-        try {
-            Handler(Looper.getMainLooper()).post {
-                signUpFragmentBinding.progressBar.visibility = View.VISIBLE
-            }
-            val uploadRes = cloudinary.uploader().upload(imageFile, ObjectUtils.emptyMap())
-            val imageUrl = uploadRes["secure_url"].toString()
-            SharedPreferenceHelper.setString(this.context!!, Constant.PROFILE_IMAGE, imageUrl)
-            Log.i(TAG, "map object is $imageUrl")
+	private fun pickFromGallery() {
+		//Create an Intent with action as ACTION_PICK
+		val intent = Intent(Intent.ACTION_PICK)
+		// Sets the type as image/*. This ensures only components of type image are selected
+		intent.type = "image/*"
+		// Launching the Intent
+		startActivityForResult(intent, GALLERY_REQUEST_CODE)
+	}
 
-            Handler(Looper.getMainLooper()).post {
-                signUpFragmentBinding.progressBar.visibility = View.GONE
-            }
+	override fun onRequestPermissionsResult(
+		requestCode: Int,
+		permissions: Array<out String>,
+		grantResults: IntArray
+	) {
+		super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+		when (requestCode) {
+			GALLERY_PERMISSION_CODE -> {
+				if (grantResults.isEmpty() || grantResults[0] != PackageManager.PERMISSION_GRANTED) {
+					ActivityCompat.requestPermissions(
+						this.activity!!,
+						arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
+						GALLERY_REQUEST_CODE
+					)
+				} else {
+					pickFromGallery()
+				}
+			}
+		}
+	}
 
-        } catch (e: IOException) {
-            Log.i(TAG, "exception caught while trying to load image ${e.message}")
-            Handler(Looper.getMainLooper()).post {
-                signUpFragmentBinding.progressBar.visibility = View.GONE
-            }
-        }
-    }
+	override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+		super.onActivityResult(requestCode, resultCode, data)
+		if (resultCode == Activity.RESULT_OK && data!!.data != null) {
+			when (requestCode) {
+				GALLERY_REQUEST_CODE -> {
+					loadImage(data.data!!)
+					val filePath = getRealPathFromURIPath(data.data!!, this.activity!!)
+					GlobalScope.launch {
+						uploadUserImage(File(filePath))
+					}
+				}
+			}
+		}
+	}
 
-    private fun showToast(error: String) {
-        Toast.makeText(this.context, error, Toast.LENGTH_LONG).show()
-    }
+	private fun getRealPathFromURIPath(contentURI: Uri, activity: Activity): String {
+		val cursor = activity.contentResolver.query(contentURI, null, null, null, null)
+		return if (cursor == null) {
+			contentURI.path!!
+		} else {
+			cursor.moveToFirst()
+			val idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA)
+			cursor.getString(idx)
+		}
+	}
 
-    private fun getUserDob(month: Int, dayOfMonth: Int, year: Int): String {
-        val cal = Calendar.getInstance()
-        cal.set(Calendar.YEAR, year)
-        cal.set(Calendar.MONTH, month)
-        cal.set(Calendar.DAY_OF_MONTH, dayOfMonth)
-        val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH)
-        return simpleDateFormat.format(cal.time)
-    }
+	private fun uploadUserImage(imageFile: File) {
+		config[Constant.CLOUD_NAME] = Constant.NAME
+		config[Constant.API_KEY] = Constant.KEY
+		config[Constant.API_SECRET] = Constant.SECRET
 
-    private fun loadImage(imageUri: Uri) {
-        Picasso.get()
-            .load(imageUri)
-            .placeholder(R.drawable.loading_animation)
-            .into(signUpFragmentBinding.imgContactImage)
-    }
+		val cloudinary = Cloudinary(config)
+		try {
+			Handler(Looper.getMainLooper()).post {
+				signUpFragmentBinding.progressBar.visibility = View.VISIBLE
+			}
+			val uploadRes = cloudinary.uploader().upload(imageFile, ObjectUtils.emptyMap())
+			val imageUrl = uploadRes["secure_url"].toString()
+			SharedPreferenceHelper.setString(this.context!!, Constant.PROFILE_IMAGE, imageUrl)
+			Log.i(TAG, "map object is $imageUrl")
+
+			Handler(Looper.getMainLooper()).post {
+				signUpFragmentBinding.progressBar.visibility = View.GONE
+			}
+
+		} catch (e: IOException) {
+			Log.i(TAG, "exception caught while trying to load image ${e.message}")
+			Handler(Looper.getMainLooper()).post {
+				signUpFragmentBinding.progressBar.visibility = View.GONE
+			}
+		}
+	}
+
+	private fun showToast(error: String) {
+		Toast.makeText(this.context, error, Toast.LENGTH_LONG).show()
+	}
+
+	private fun getUserDob(month: Int, dayOfMonth: Int, year: Int): String {
+		val cal = Calendar.getInstance()
+		cal.set(Calendar.YEAR, year)
+		cal.set(Calendar.MONTH, month)
+		cal.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+		val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH)
+		return simpleDateFormat.format(cal.time)
+	}
+
+	private fun loadImage(imageUri: Uri) {
+		Picasso.get()
+			.load(imageUri)
+			.placeholder(R.drawable.loading_animation)
+			.into(signUpFragmentBinding.imgContactImage)
+	}
 }
 
 

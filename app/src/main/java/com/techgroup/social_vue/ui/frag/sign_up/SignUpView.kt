@@ -16,4 +16,6 @@ interface SignUpView {
 
     fun showSuccessMsg(error: String)
 
+    fun navigate(direction: Int)
+	
 }

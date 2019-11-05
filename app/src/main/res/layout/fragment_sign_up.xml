@@ -1,186 +1,186 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-		xmlns:app="http://schemas.android.com/apk/res-auto"
-		xmlns:tools="http://schemas.android.com/tools">
-	
-	<ScrollView
-			android:layout_width="match_parent"
-			android:layout_height="match_parent"
-			android:fillViewport="true">
-		
-		<androidx.constraintlayout.widget.ConstraintLayout
-				android:layout_width="match_parent"
-				android:layout_height="wrap_content"
-				tools:context=".ui.frag.sign_up.SignUpFragment">
-			
-			<androidx.constraintlayout.widget.ConstraintLayout
-					android:id="@+id/profile_layout"
-					android:layout_width="170dp"
-					android:layout_height="170dp"
-					android:layout_marginTop="@dimen/dimen_20"
-					android:background="@drawable/profile_bac_drawable"
-					app:elevation="@dimen/dimen_20"
-					app:layout_constraintEnd_toEndOf="parent"
-					app:layout_constraintStart_toStartOf="parent"
-					app:layout_constraintTop_toTopOf="parent">
-				
-				<de.hdodenhof.circleimageview.CircleImageView
-						android:id="@+id/imgContactImage"
-						android:layout_width="match_parent"
-						android:layout_height="match_parent"
-						app:layout_constraintBottom_toBottomOf="parent"
-						app:layout_constraintLeft_toLeftOf="parent"
-						app:layout_constraintRight_toRightOf="parent"
-						app:layout_constraintTop_toTopOf="parent" />
-			</androidx.constraintlayout.widget.ConstraintLayout>
-			
-			
-			<androidx.constraintlayout.widget.ConstraintLayout
-					android:id="@+id/img_select_profile"
-					android:layout_width="@dimen/dimen_50"
-					android:layout_height="@dimen/dimen_50"
-					android:layout_marginStart="@dimen/dimen_8"
-					android:background="@drawable/profile_drawable"
-					android:orientation="vertical"
-					android:tint="@color/colorPrimary"
-					app:layout_constraintBottom_toBottomOf="@id/profile_layout"
-					app:layout_constraintRight_toRightOf="@id/profile_layout">
-				
-				<ImageView
-						android:id="@+id/img_camera"
-						android:layout_width="@dimen/dimen_30"
-						android:layout_height="@dimen/dimen_30"
-						android:src="@drawable/ic_image_galley"
-						android:tint="@color/white"
-						app:layout_constraintBottom_toBottomOf="parent"
-						app:layout_constraintLeft_toLeftOf="parent"
-						app:layout_constraintRight_toRightOf="parent"
-						app:layout_constraintTop_toTopOf="parent" />
-			
-			</androidx.constraintlayout.widget.ConstraintLayout>
-			
-			
-			<com.google.android.material.textfield.TextInputLayout
-					android:id="@+id/fullNameTextInput"
-					style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-					android:layout_width="0dp"
-					android:layout_height="wrap_content"
-					android:layout_marginStart="@dimen/dimen_16"
-					android:layout_marginTop="@dimen/dimen_25"
-					android:layout_marginEnd="@dimen/dimen_16"
-					android:hint="Full name"
-					app:layout_constraintEnd_toEndOf="parent"
-					app:layout_constraintStart_toStartOf="parent"
-					app:layout_constraintTop_toBottomOf="@id/profile_layout">
-				
-				<com.google.android.material.textfield.TextInputEditText
-						android:id="@+id/full_name_edit_text"
-						android:layout_width="match_parent"
-						android:layout_height="wrap_content"
-						android:inputType="textPersonName" />
-			</com.google.android.material.textfield.TextInputLayout>
-			
-			<com.google.android.material.textfield.TextInputLayout
-					android:id="@+id/emailTextInput"
-					style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-					android:layout_width="0dp"
-					android:layout_height="wrap_content"
-					android:layout_marginTop="@dimen/dimen_10"
-					android:hint="@string/email_address"
-					app:layout_constraintEnd_toEndOf="@id/dob_date_picker"
-					app:layout_constraintStart_toStartOf="@id/dob_date_picker"
-					app:layout_constraintTop_toBottomOf="@id/fullNameTextInput">
-				
-				<com.google.android.material.textfield.TextInputEditText
-						android:id="@+id/email_edit_text"
-						android:layout_width="match_parent"
-						android:layout_height="wrap_content"
-						android:inputType="textEmailAddress" />
-			</com.google.android.material.textfield.TextInputLayout>
-			
-			<androidx.appcompat.widget.AppCompatTextView
-					android:id="@+id/dobTextView"
-					android:layout_width="@dimen/dimen_0"
-					android:layout_height="wrap_content"
-					android:layout_marginTop="@dimen/dimen_16"
-					android:fontFamily="@font/open_sans_semi_bold"
-					android:text="@string/date_of_birth"
-					android:textSize="@dimen/text_size_18"
-					app:layout_constraintEnd_toEndOf="@id/emailTextInput"
-					app:layout_constraintStart_toStartOf="@id/emailTextInput"
-					app:layout_constraintTop_toBottomOf="@id/emailTextInput" />
-			
-			<DatePicker
-					android:id="@+id/dob_date_picker"
-					android:layout_width="0dp"
-					android:layout_height="wrap_content"
-					android:calendarViewShown="false"
-					android:datePickerMode="spinner"
-					app:layout_constraintEnd_toEndOf="@id/fullNameTextInput"
-					app:layout_constraintStart_toStartOf="@id/fullNameTextInput"
-					app:layout_constraintTop_toBottomOf="@id/dobTextView" />
-			
-			<com.google.android.material.textfield.TextInputLayout
-					android:id="@+id/stateOfOriginTextInput"
-					style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-					android:layout_width="0dp"
-					android:layout_height="wrap_content"
-					android:layout_marginTop="@dimen/dimen_8"
-					android:hint="State of origin"
-					app:layout_constraintEnd_toEndOf="@id/emailTextInput"
-					app:layout_constraintStart_toStartOf="@id/emailTextInput"
-					app:layout_constraintTop_toBottomOf="@id/dob_date_picker">
-				
-				<com.google.android.material.textfield.TextInputEditText
-						android:id="@+id/state_of_origin_edit_text"
-						android:layout_width="match_parent"
-						android:layout_height="wrap_content"
-						android:inputType="textLongMessage" />
-			</com.google.android.material.textfield.TextInputLayout>
-			
-			
-			<TextView
-					android:id="@+id/tv_terms_conditions"
-					android:layout_width="0dp"
-					android:layout_height="wrap_content"
-					android:layout_marginTop="10dp"
-					android:fontFamily="@font/open_sans"
-					android:gravity="center"
-					android:text="@string/terms_and_conditions"
-					android:textSize="18sp"
-					app:layout_constraintEnd_toEndOf="parent"
-					app:layout_constraintStart_toStartOf="parent"
-					app:layout_constraintTop_toBottomOf="@id/stateOfOriginTextInput" />
-			
-			
-			<com.google.android.material.button.MaterialButton
-					android:id="@+id/btnSignUp"
-					style="@style/Widget.MaterialComponents.Button"
-					android:layout_width="0dp"
-					android:layout_height="70dp"
-					android:layout_marginTop="@dimen/dimen_20"
-					android:text="Create new Account"
-					android:textAllCaps="false"
-					android:textSize="@dimen/text_size_16"
-					app:backgroundTint="@color/colorPrimary"
-					app:cornerRadius="@dimen/dimen_12"
-					app:elevation="12dp"
-					app:layout_constraintBottom_toBottomOf="parent"
-					app:layout_constraintLeft_toLeftOf="@id/stateOfOriginTextInput"
-					app:layout_constraintRight_toRightOf="@id/stateOfOriginTextInput"
-					app:layout_constraintTop_toBottomOf="@id/tv_terms_conditions" />
-			
-			<ProgressBar
-					android:id="@+id/progressBar"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:visibility="gone"
-					app:layout_constraintBottom_toBottomOf="@id/profile_layout"
-					app:layout_constraintEnd_toEndOf="@id/profile_layout"
-					app:layout_constraintStart_toStartOf="@id/profile_layout"
-					app:layout_constraintTop_toTopOf="@id/profile_layout" />
-		
-		</androidx.constraintlayout.widget.ConstraintLayout>
-	
-	</ScrollView>
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:context=".ui.frag.sign_up.SignUpFragment">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/profile_layout"
+                android:layout_width="170dp"
+                android:layout_height="170dp"
+                android:layout_marginTop="@dimen/dimen_20"
+                android:background="@drawable/profile_bac_drawable"
+                app:elevation="@dimen/dimen_20"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/imgContactImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/img_select_profile"
+                android:layout_width="@dimen/dimen_50"
+                android:layout_height="@dimen/dimen_50"
+                android:layout_marginStart="@dimen/dimen_8"
+                android:background="@drawable/profile_drawable"
+                android:orientation="vertical"
+                android:tint="@color/colorPrimary"
+                app:layout_constraintBottom_toBottomOf="@id/profile_layout"
+                app:layout_constraintRight_toRightOf="@id/profile_layout">
+
+                <ImageView
+                    android:id="@+id/img_camera"
+                    android:layout_width="@dimen/dimen_30"
+                    android:layout_height="@dimen/dimen_30"
+                    android:src="@drawable/ic_image_galley"
+                    android:tint="@color/white"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/fullNameTextInput"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dimen_16"
+                android:layout_marginTop="@dimen/dimen_25"
+                android:layout_marginEnd="@dimen/dimen_16"
+                android:hint="Full name"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/profile_layout">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/full_name_edit_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/emailTextInput"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_10"
+                android:hint="@string/email_address"
+                app:layout_constraintEnd_toEndOf="@id/dob_date_picker"
+                app:layout_constraintStart_toStartOf="@id/dob_date_picker"
+                app:layout_constraintTop_toBottomOf="@id/fullNameTextInput">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/email_edit_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textEmailAddress" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/dobTextView"
+                android:layout_width="@dimen/dimen_0"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_16"
+                android:fontFamily="@font/open_sans_semi_bold"
+                android:text="@string/date_of_birth"
+                android:textSize="@dimen/text_size_18"
+                app:layout_constraintEnd_toEndOf="@id/emailTextInput"
+                app:layout_constraintStart_toStartOf="@id/emailTextInput"
+                app:layout_constraintTop_toBottomOf="@id/emailTextInput" />
+
+            <DatePicker
+                android:id="@+id/dob_date_picker"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:calendarViewShown="false"
+                android:datePickerMode="spinner"
+                app:layout_constraintEnd_toEndOf="@id/fullNameTextInput"
+                app:layout_constraintStart_toStartOf="@id/fullNameTextInput"
+                app:layout_constraintTop_toBottomOf="@id/dobTextView" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/stateOfOriginTextInput"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_8"
+                android:hint="State of origin"
+                app:layout_constraintEnd_toEndOf="@id/emailTextInput"
+                app:layout_constraintStart_toStartOf="@id/emailTextInput"
+                app:layout_constraintTop_toBottomOf="@id/dob_date_picker">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/state_of_origin_edit_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textLongMessage" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <!--<TextView
+                    android:id="@+id/tv_terms_conditions"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/open_sans"
+                    android:gravity="center"
+                    android:text="@string/terms_and_conditions"
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/stateOfOriginTextInput" />-->
+
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnSignUp"
+                style="@style/Widget.MaterialComponents.Button"
+                android:layout_width="0dp"
+                android:layout_height="70dp"
+                android:layout_marginTop="@dimen/dimen_20"
+                android:text="Create new Account"
+                android:textAllCaps="false"
+                android:textSize="@dimen/text_size_16"
+                app:backgroundTint="@color/colorPrimary"
+                app:cornerRadius="@dimen/dimen_12"
+                app:elevation="12dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="@id/stateOfOriginTextInput"
+                app:layout_constraintRight_toRightOf="@id/stateOfOriginTextInput"
+                app:layout_constraintTop_toBottomOf="@id/stateOfOriginTextInput" />
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@id/profile_layout"
+                app:layout_constraintEnd_toEndOf="@id/profile_layout"
+                app:layout_constraintStart_toStartOf="@id/profile_layout"
+                app:layout_constraintTop_toTopOf="@id/profile_layout" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
 </layout>
