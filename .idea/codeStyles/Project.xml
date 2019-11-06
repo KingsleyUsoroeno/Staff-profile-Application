@@ -1,7 +1,7 @@
 <component name="ProjectCodeStyleConfiguration">
   <code_scheme name="Project" version="173">
     <JetCodeStyleSettings>
-      <option name="CODE_STYLE_DEFAULTS" value="KOTLIN_OFFICIAL" />
+      <option name="CODE_STYLE_DEFAULTS" value="KOTLIN_OLD_DEFAULTS" />
     </JetCodeStyleSettings>
     <codeStyleSettings language="XML">
       <indentOptions>
@@ -116,7 +116,13 @@
       </arrangement>
     </codeStyleSettings>
     <codeStyleSettings language="kotlin">
-      <option name="CODE_STYLE_DEFAULTS" value="KOTLIN_OFFICIAL" />
+      <option name="CODE_STYLE_DEFAULTS" value="KOTLIN_OLD_DEFAULTS" />
+      <indentOptions>
+        <option name="CONTINUATION_INDENT_SIZE" value="12" />
+        <option name="USE_TAB_CHARACTER" value="true" />
+        <option name="SMART_TABS" value="true" />
+        <option name="KEEP_INDENTS_ON_EMPTY_LINES" value="true" />
+      </indentOptions>
     </codeStyleSettings>
   </code_scheme>
 </component>
